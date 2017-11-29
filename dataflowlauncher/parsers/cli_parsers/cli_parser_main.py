@@ -1,6 +1,7 @@
 """This is where we register argument parsers"""
 from argparse import RawTextHelpFormatter, ArgumentParser
 
+from dataflowlauncher.parsers.cli_parsers.override_arguments_cli_parser import OverrideArgumentsParser
 from dataflowlauncher.parsers.cli_parsers.pom_cli_parser import PomCliParser
 from dataflowlauncher.parsers.cli_parsers.pubsub_cli_parser import PubsubCliParser
 from dataflowlauncher.parsers.cli_parsers.required_cli_parser import RequiredCliParser
@@ -10,7 +11,8 @@ CLI_PARSER_ITERABLE = (
     RequiredCliParser,
     PomCliParser,
     PubsubCliParser,
-    UtilCliParser
+    UtilCliParser,
+    OverrideArgumentsParser
 )
 
 
@@ -52,14 +54,14 @@ def get_updated_config_dict(config, cli_args, cli_parser_iterable=None):
     return updated_config
 
 
-def get_updated_launch_params(config, cli_args, cli_parser_iterable=None):
+def get_updated_launch_params(parameter_dict, cli_args, cli_parser_iterable=None):
     if cli_parser_iterable is None:
         cli_parser_iterable = CLI_PARSER_ITERABLE
 
     updated_param_dict = dict()
     for cli_class in cli_parser_iterable:
         cli_parser = cli_class()
-        to_update = cli_parser.get_updated_params_from_args(config, cli_args)
+        to_update = cli_parser.get_updated_params_from_args(parameter_dict, cli_args)
         if to_update is not None:
             updated_param_dict.update(to_update)
 

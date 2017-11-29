@@ -40,7 +40,7 @@ def run(args, unknown_args, exec_path):
 
     """Generate parameters with config readers, update parameters with cli parsers """
     parameter_dict = get_jar_parameter_dict(config)
-    parameter_dict.update(get_updated_launch_params(config, args))
+    parameter_dict.update(get_updated_launch_params(parameter_dict, args))
 
     parameter_list = get_formatted_launch_parameters(parameter_dict, args.unknown_arguments, unknown_args)
     print_launch_parameters(parameter_list)
