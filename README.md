@@ -189,6 +189,22 @@ pubsub {
 ```
 The command you'd get would be: `--subscription=projects/testProjectId/subscriptions/some_subscription_name`
 
+The `read_verbatim` option also allows reading of subscriptions from external projects, by setting the `project_id` field, eg:
+```
+required {
+  project_id: "testProjectId"
+  name: "flowName"
+}
+
+pubsub {
+  read_verbatim = {
+    "project_id": "external_project_id"
+    "subscription": "some_subscription_name"
+  }
+}
+```
+The command you'd get from this configuration would be `--subscription=projects/external_project_id/subscriptions/some_subscription_name`
+
 In contrast, topics under `pubsub.write` only need to contain the topic name. For instance,
 ```
 required {

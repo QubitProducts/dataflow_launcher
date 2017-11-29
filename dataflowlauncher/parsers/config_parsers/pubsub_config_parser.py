@@ -58,8 +58,16 @@ class PubSubConfigParser(ConfigParser):
     @staticmethod
     def add_subscription_verbatim(config):
         result = dict()
-        for sub_arg_name, sub in config[PUBSUB_READ_VERBATIM].items():
+        read_verbatim = config[PUBSUB_READ_VERBATIM]
+        if 'project_id' in read_verbatim:
+            subscription_project = read_verbatim['project_id']
+            read_verbatim = dict(read_verbatim)
+            del read_verbatim['project_id']
+        else:
+            subscription_project = config[JOB_PROJECT_ID]
+
+        for sub_arg_name, sub in read_verbatim.items():
             result[sub_arg_name] = get_subscription_name(
-                config[JOB_PROJECT_ID], sub)
+                subscription_project, sub)
 
         return result
