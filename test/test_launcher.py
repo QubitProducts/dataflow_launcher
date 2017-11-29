@@ -19,6 +19,11 @@ class TestLauncher(TestCase):
         env_list = launcher.get_formatted_launch_parameters(dict(), True, ['--evil-arg'])
         self.assertIn('--evil-arg', env_list)
 
+    def test_unknown_arguments_override_config_arguments(self):
+        env_list = launcher.get_formatted_launch_parameters(dict({'existing-arg': 'old-value'}), True, ['--existing-arg=new-value'])
+        self.assertIn('--existing-arg=new-value', env_list)
+        self.assertNotIn('--existing-arg=old-value', env_list)
+
     @patch("dataflowlauncher.parsers.config_parsers.required_config_parser.get_job_status", autospec=True)
     @patch("dataflowlauncher.parsers.config_parsers.required_config_parser.create_gcs_if_not_exists", autospec=True)
     def test_parameter_list_formatting(self, mock_dataflow_utils, mock_gcs_utils):
