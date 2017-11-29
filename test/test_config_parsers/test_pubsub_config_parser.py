@@ -102,6 +102,22 @@ class TestPubSubConfigParser(TestCase):
         result = self.parser.add_subscription_verbatim(sample_config)
         self.assertDictEqual(reference_result, result)
 
+    def test_add_external_project_subscription_verbatim(self):
+        sample_config = {
+            PUBSUB_READ_VERBATIM: {
+                "project_id": "external_project",
+                "subscriptionName": "test_subscription_to_read_from"},
+            JOB_PROJECT_ID: "test_id",
+            JOB_NAME: "test_name"
+        }
+        reference_result = {
+            "subscriptionName":
+                "projects/external_project/subscriptions/" \
+                "test_subscription_to_read_from",
+        }
+        result = self.parser.add_subscription_verbatim(sample_config)
+        self.assertDictEqual(reference_result, result)
+
 
 if __name__ == '__main__':
     main()
