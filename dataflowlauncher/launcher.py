@@ -19,16 +19,16 @@ logging.basicConfig(level=logging.INFO)
 
 def main():
     parser = get_cli_argument_parser()
-    args, unknown_args = parser.parse_known_args()
-    logging.debug("Parsed CLI arguments - args: %s, unknown args: %s", args, unknown_args)
+    args = parser.parse_args()
+    logging.debug("Parsed CLI arguments - args: %s", args)
 
     if not args.ignore_checks:
         assert_clean_master(getcwd())
 
-    run(args, unknown_args, getcwd())
+    run(args, getcwd())
 
 
-def run(args, unknown_args, exec_path):
+def run(args, exec_path):
     conf_file = os.path.join(exec_path, args.file)
 
     """Read configuration with config readers, update configuration with cli parsers"""
@@ -42,7 +42,7 @@ def run(args, unknown_args, exec_path):
     parameter_dict = get_jar_parameter_dict(config)
     parameter_dict.update(get_updated_launch_params(parameter_dict, args))
 
-    parameter_list = get_formatted_launch_parameters(parameter_dict, args.unknown_arguments, unknown_args)
+    parameter_list = get_formatted_launch_parameters(parameter_dict)
     print_launch_parameters(parameter_list)
 
     jar_file = args.jar_file
@@ -58,14 +58,9 @@ def run(args, unknown_args, exec_path):
                                exec_path, jar_file)
 
 
-def get_formatted_launch_parameters(parameter_dict, add_unknown_args, unknown_args):
-    """Format launch param dict and add on unknown args if needed"""
+def get_formatted_launch_parameters(parameter_dict):
+    """Format launch param dict"""
     parameter_list = format_launch_parameters(parameter_dict)
-
-    if add_unknown_args:
-        """Adding on the unknown arguments"""
-        for argument in unknown_args:
-            parameter_list.append(argument)
 
     return parameter_list
 

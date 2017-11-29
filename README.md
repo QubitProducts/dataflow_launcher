@@ -47,7 +47,7 @@ Make sure you have `virtualenv` installed.
 
 `--ignore_checks`: Ignore production checks
 
-`--unknown_arguments`: Pass any unknown arguments to the underlying command
+`--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
 
 `-b` or `--bypass_prompt`: Skip the enter key press required before launching.
 
@@ -59,7 +59,6 @@ Make sure you have `virtualenv` installed.
 - Transform configuration dictionary into a parameter dictionary using the registered configuration readers
 - Update the parameter dictionary with any overrides from the registered cli argument readers
 - Transform the parameter dictionary into a list of formatted parameters
-- Append unknown arguments if the `--unknown_arguments` flag is set
 - Figure out JAR path if not specified
 - Launch flow with the parameter list
 
