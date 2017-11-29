@@ -40,10 +40,16 @@ def run(args, exec_path):
 
     """Generate parameters with config readers, update parameters with cli parsers """
     parameter_dict = get_jar_parameter_dict(config)
-    parameter_dict.update(get_updated_launch_params(parameter_dict, args))
 
-    parameter_list = get_formatted_launch_parameters(parameter_dict)
-    print_launch_parameters(parameter_list)
+    updated_parameters = get_updated_launch_params(parameter_dict, args)
+
+    updated_parameter_dict = dict(parameter_dict)
+    updated_parameter_dict.update(updated_parameters)
+
+    parameter_list = get_formatted_launch_parameters(updated_parameter_dict)
+
+    print_launch_parameters(updated_parameter_dict)
+    print_updated_parameters(updated_parameters, parameter_dict)
 
     jar_file = args.jar_file
     if jar_file is None or not jar_file.strip():
@@ -70,13 +76,22 @@ def print_launch_parameters(parameters):
         return
 
     print("===== Setting Parameters ====")
-    params_and_values = [(i[0], '='.join(i[1:])) for i in
-                         [v.split('=') for v in parameters] if
-                         len(i) > 1]
-    for (var, val) in sorted(params_and_values, key=lambda x: x[0]):
-        if var == '--projectId':
+    for (var, val) in sorted(parameters.items(), key=lambda x: x[0]):
+        if var == 'project':
             val = colored.red(val, bold=True)
-        print("\t{} = {}".format(var, val))
+        print("\t--{} = {}".format(var, val))
+    print()
+
+
+def print_updated_parameters(updated_parameters, old_parameters):
+    if updated_parameters is None or len(updated_parameters) == 0:
+        return
+
+    print("===== Overridden Parameters ====")
+    for (var, val) in sorted(updated_parameters.items(), key=lambda x: x[0]):
+        if var == 'project':
+            val = colored.red(val, bold=True)
+        print("\t{}: old value = {} ----replaced-by---> new value = {}".format(var,old_parameters[var], val))
     print()
 
 
