@@ -6,10 +6,10 @@ class OverrideArgumentsParser(CliParser):
     def add_arguments_group(self, parser):
         override_arguments_parser = parser.add_argument_group(
             "overrides",
-            description="Pass in the parameters to override those specified in config file")
+            description="Pass in the parameters to override those derived from config file and previous cli-parsers")
         override_arguments_parser.add_argument(
             '--override_arguments', nargs='*',
-            help='List of parameters to override from those specified in the config file, as a space-separated list of the form <fieldName>=<value>')
+            help='List of parameters to override from those derived from the config file, as a space-separated list of the form <fieldName>=<value>')
 
     def run_preprocessing(self, config_dict, cli_args):
         return None

@@ -11,10 +11,6 @@ class UtilCliParser(CliParser):
             '--ignore_checks', action='store_true',
             help='Ignore production checks. Default: false')
         util_parsers.add_argument(
-            '--unknown_arguments', action='store_true',
-            help='Pass any unknown arguments to the underlying command'
-                 'Default: false')
-        util_parsers.add_argument(
             '-b', '--bypass_prompt', action='store_true',
             help='Skip enter key press required before launching. Default: false')
 

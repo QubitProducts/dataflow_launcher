@@ -209,3 +209,19 @@ The command you'd get would be `--topic=projects/testProjectId/topics/some_test_
     This will also create a default subscription onto the topic created. W/o any subscriptions the data is not persisted.
 - `-i` or `--create_missing_input_topics`
     In order for this to work properly, the naming convention described above needs to be upheld.
+- `--override_arguments` This command takes a list of `<key>=<value>` pairs, and passes them directly to the underlying dataflow launch command. These will override any corresponding values set in the config file. For example:
+
+```
+required {
+  project_id: "testProjectId"
+  name: "flowName"
+}
+
+pubsub {
+  read_verbatim = {
+    "subscription": "some_subscription_name"
+  }
+}
+```
+
+- Running with the cli option `--override_arguments subscription=different_subscription` will result in the dataflow being launched with `--subscription=different_subscription` instead of `--subscription=projects/testProjectId/subscriptions/some_test_topic_name`. Note that there can be a difference between the field name set in the config file, and that which is sent to the dataflow launch command, eg: `num_workers` maps to `numWorkers`, so to override this value you would use `--override_arguments numWorkers=4` for example.
