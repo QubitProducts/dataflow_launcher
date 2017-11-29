@@ -189,7 +189,7 @@ pubsub {
 ```
 The command you'd get would be: `--subscription=projects/testProjectId/subscriptions/some_subscription_name`
 
-The `read_verbatim` option also allows reading of subscirptions from external projects, by setting the `project_id` field, eg:
+The `read_verbatim` option also allows reading of subscriptions from external projects, by setting the `project_id` field, eg:
 ```
 required {
   project_id: "testProjectId"
