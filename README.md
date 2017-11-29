@@ -47,9 +47,9 @@ Make sure you have `virtualenv` installed.
 
 `--ignore_checks`: Ignore production checks
 
-`--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
-
 `-b` or `--bypass_prompt`: Skip the enter key press required before launching.
+
+`--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
 
 ### Program flow structure ###
 
