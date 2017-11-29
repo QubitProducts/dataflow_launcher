@@ -10,6 +10,7 @@ class OverrideArgumentsParser(CliParser):
             description="Pass in the parameters to override those derived from config file and previous cli-parsers")
         override_arguments_parser.add_argument(
             '--override_arguments', nargs='*',
+            default=[],
             help='List of parameters to override from those derived from the config file, as a space-separated list of'
                  ' the form <fieldName>=<value>')
 
