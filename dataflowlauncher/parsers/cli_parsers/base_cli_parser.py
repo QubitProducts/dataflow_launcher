@@ -16,7 +16,7 @@ class CliParser(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def get_updated_params_from_args(self, config_dict, cli_args):
+    def get_updated_params_from_args(self, parameter_dict, cli_args):
         """Use to add or overwrite any parameters than will be passed to the launch command"""
         pass
 

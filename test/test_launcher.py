@@ -11,14 +11,6 @@ class TestLauncher(TestCase):
     def setUp(self):
         logging.disable(logging.CRITICAL)
 
-    def test_no_unknown_arguments(self):
-        formatted_param_list = launcher.get_formatted_launch_parameters(dict(), False, ['--evil-arg'])
-        self.assertNotIn('--evil-arg', formatted_param_list)
-
-    def test_unknown_arguments(self):
-        env_list = launcher.get_formatted_launch_parameters(dict(), True, ['--evil-arg'])
-        self.assertIn('--evil-arg', env_list)
-
     @patch("dataflowlauncher.parsers.config_parsers.required_config_parser.get_job_status", autospec=True)
     @patch("dataflowlauncher.parsers.config_parsers.required_config_parser.create_gcs_if_not_exists", autospec=True)
     def test_parameter_list_formatting(self, mock_dataflow_utils, mock_gcs_utils):
@@ -27,7 +19,7 @@ class TestLauncher(TestCase):
 
         test_conf = config_parser_main.parse_config_file(get_absolute_path("_testing/test_conf.conf"))
         parameter_list = config_parser_main.get_jar_parameter_dict(test_conf)
-        formatted_param_list = launcher.get_formatted_launch_parameters(parameter_list, False, [])
+        formatted_param_list = launcher.get_formatted_launch_parameters(parameter_list)
         self.assertCountEqual([
             '--project=test_project_id',
             '--stagingLocation=gs://test_project_id-temp',
