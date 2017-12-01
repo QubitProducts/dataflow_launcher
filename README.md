@@ -241,4 +241,6 @@ pubsub {
 }
 ```
 
-- Running with the cli option `--override_arguments subscription=different_subscription` will result in the dataflow being launched with `--subscription=different_subscription` instead of `--subscription=projects/testProjectId/subscriptions/some_test_topic_name`. Note that there can be a difference between the field name set in the config file, and that which is sent to the dataflow launch command, eg: `num_workers` maps to `numWorkers`, so to override this value you would use `--override_arguments numWorkers=4` for example.
+- Running with the cli option `--override_arguments subscription=different_subscription` will result in the dataflow being launched with `--subscription=different_subscription` instead of `--subscription=projects/testProjectId/subscriptions/some_test_topic_name`. 
+
+**Note** that there can be a difference between the field name set in the config file, and that which is sent to the dataflow launch command, eg: `num_workers` maps to `numWorkers`, so to override this value you would use `--override_arguments numWorkers=4` for example.
