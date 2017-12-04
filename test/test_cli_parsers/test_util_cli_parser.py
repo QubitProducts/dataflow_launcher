@@ -7,10 +7,10 @@ from dataflowlauncher.parsers.cli_parsers.util_cli_parser\
 class TestUtilCliParser(TestCase):
     def test_add_arguments_group(self):
         parser = ArgumentParser(prog="PROG")
-        input_arg_str = "--ignore_checks --bypass_prompt"
+        input_arg_str = "--ignore_git --bypass_prompt"
         UtilCliParser().add_arguments_group(parser)
         args = parser.parse_args(input_arg_str.split())
-        self.assertTrue(args.ignore_checks)
+        self.assertTrue(args.ignore_git)
         self.assertTrue(args.bypass_prompt)
 
 
