@@ -24,5 +24,6 @@ def parse_pom(filename):
     return artifact, version
 
 
-def get_jar_filename(jar_path, artifact, version):
-    return "{0}/{1}-{2}.jar".format(jar_path, artifact, version)
+def get_jar_filename(jar_path, artifact, version, jar_name_format):
+    jar_name = jar_name_format.format(artifact=artifact, version=version)
+    return "{0}/{1}".format(jar_path, jar_name)

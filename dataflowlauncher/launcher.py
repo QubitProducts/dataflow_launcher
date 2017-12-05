@@ -6,7 +6,7 @@ import os.path
 from os import getcwd
 from clint.textui import colored
 
-from dataflowlauncher.constants import POM
+from dataflowlauncher.constants import POM, JAR_NAME_FORMAT
 from dataflowlauncher.parsers.cli_parsers.cli_parser_main import get_cli_argument_parser, get_updated_config_dict, \
     run_cli_setup_actions, get_updated_launch_params
 from dataflowlauncher.parsers.config_parsers.config_parser_main import parse_config_file, get_jar_parameter_dict
@@ -58,7 +58,7 @@ def run(args, exec_path):
         artifact, version = parse_pom(pom_path)
         assert artifact != ''
         assert version != ''
-        jar_file = get_jar_filename(args.jar_path, artifact, version)
+        jar_file = get_jar_filename(args.jar_path, artifact, version, config[JAR_NAME_FORMAT])
 
     return run_with_parameters(parameter_list, args.bypass_prompt,
                                exec_path, jar_file)

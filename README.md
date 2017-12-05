@@ -84,6 +84,7 @@ All configuration information needs to be present in `flow.conf`
 - `flow.worker_type`: The type of dataflow workers. Default: `n1-standard-4`
 - `flow.loglevel`: Log level for the job. Default: `INFO`
 - `pom.name`: Path to POM file. Default: `pom.xml`
+- `pom.generated_jar_name:` The name of the generated jar file. Default: `{artifact}-{version}.jar`. `{artifact}` and `{version}` will be replaced by the artifact-id and version as defined in the pom file
 - `pubsub.read`: Map of pubsub read topics. See below for nomenclature.
 - `pubsub.write`: Map of pubsub write topics. See below for nomenclature.
 - `params`: Optional key-value parameters
@@ -104,6 +105,7 @@ required {
 
 pom {
   name: "test_pom.xml"
+  generated_jar_name: "{artifact}-{version}-dist.jar"
 }
 
 pubsub {
