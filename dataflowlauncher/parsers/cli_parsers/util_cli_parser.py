@@ -8,8 +8,8 @@ class UtilCliParser(CliParser):
             "util",
             description="Pass in the utility parameters for the dataflow")
         util_parsers.add_argument(
-            '--ignore_checks', action='store_true',
-            help='Ignore production checks. Default: false')
+            '--ignore_git', action='store_true',
+            help='Ignore git clean branch check. Default: false')
         util_parsers.add_argument(
             '-b', '--bypass_prompt', action='store_true',
             help='Skip enter key press required before launching. Default: false')

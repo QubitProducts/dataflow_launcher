@@ -45,7 +45,7 @@ Make sure you have `virtualenv` installed.
 
 `--jar_file`: Path to the JAR file. Overrides -j. Default: NONE
 
-`--ignore_checks`: Ignore production checks
+`--ignore_git`: Ignore git clean branch check
 
 `-b` or `--bypass_prompt`: Skip the enter key press required before launching.
 

@@ -10,7 +10,7 @@ from dataflowlauncher.constants import POM
 from dataflowlauncher.parsers.cli_parsers.cli_parser_main import get_cli_argument_parser, get_updated_config_dict, \
     run_cli_setup_actions, get_updated_launch_params
 from dataflowlauncher.parsers.config_parsers.config_parser_main import parse_config_file, get_jar_parameter_dict
-from dataflowlauncher.utils.git_utils import assert_clean_master
+from dataflowlauncher.utils.git_utils import has_dirty_branch
 from dataflowlauncher.utils.pom_utils import parse_pom, get_jar_filename
 from dataflowlauncher.utils.parameter_utils import format_launch_parameters
 
@@ -22,8 +22,9 @@ def main():
     args = parser.parse_args()
     logging.debug("Parsed CLI arguments - args: %s", args)
 
-    if not args.ignore_checks:
-        assert_clean_master(getcwd())
+    if not args.ignore_git and has_dirty_branch(getcwd()):
+        print("GIT check failed: clean branch or --ignore_git flag required")
+        exit(1)
 
     run(args, getcwd())
 
@@ -56,8 +57,6 @@ def run(args, exec_path):
         """Figure out jar file from pom"""
         pom_path = os.path.join(exec_path, config[POM])
         artifact, version = parse_pom(pom_path)
-        assert artifact != ''
-        assert version != ''
         jar_file = get_jar_filename(args.jar_path, artifact, version)
 
     return run_with_parameters(parameter_list, args.bypass_prompt,
