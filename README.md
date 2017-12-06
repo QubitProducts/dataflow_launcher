@@ -82,7 +82,7 @@ All configuration information needs to be present in `flow.conf`
 - `flow.streaming`: The mode of dataflow running: true - streaming, false - batch. Default: `true`
 - `flow.num_workers`: The number of dataflow workers. Default: `1`
 - `flow.worker_type`: The type of dataflow workers. Default: `n1-standard-4`
-- `flow.loglevel`: Log level for the job. Default: `INFO`
+- `flow.logl_evel`: Log level for the job. Default: `INFO`
 - `pom.name`: Path to POM file. Default: `pom.xml`
 - `pom.generated_jar_name:` The name of the generated jar file. Default: `{artifact}-{version}.jar`. `{artifact}` and `{version}` will be replaced by the artifact-id and version as defined in the pom file
 - `pubsub.read`: Map of pubsub read topics. See below for nomenclature.
@@ -97,10 +97,10 @@ required {
   name: "test"
   zone: "test_zone"
   num_workers: 1
-  autoscalingAlgorithm: "THROUGHPUT_BASED"
-  maxNumWorkers: 10
+  autoscaling_algorithm: "THROUGHPUT_BASED"
+  max_num_workers: 10
   worker_type: "test_worker_type"
-  loglevel: "test_logLevel"
+  log_level: "test_logLevel"
 }
 
 pom {
@@ -140,9 +140,9 @@ zone
 num_workers (Default: 1)
 worker_type (Default: n1-standard-1)
 streaming (Default: true
-autoscalingAlgorithm (Default: NONE)
-maxNumWorkers
-loglevel (Default: INFO)
+autoscaling_algorithm (Default: NONE)
+max_num_workers
+log_level (Default: INFO)
 ```
 
 ### Pom Configuration ##
