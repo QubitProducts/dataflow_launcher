@@ -51,6 +51,11 @@ Make sure you have `virtualenv` installed.
 
 `--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
 
+
+**SDK/Runner Support**
+- *Dataflow SDK 1.9.1 and lower* - no configuration changes needed
+- *BEAM 2.0.0 and newer* - need to specify correct runner
+
 ### Program flow structure ###
 
 - Read the configuration file using the registered configuration readers
