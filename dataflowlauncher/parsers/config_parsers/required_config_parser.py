@@ -27,9 +27,9 @@ class RequiredConfigParser(ConfigParser):
         configuration[WORKER_COUNT] = self.conf.get_string('required.num_workers', '1')
         configuration[WORKER_TYPE] = self.conf.get_string('required.worker_type', 'n1-standard-1')
         configuration[STREAM_MODE] = self.conf.get_bool('required.streaming', True)
-        configuration[AUTOSCALING_TYPE] = self.conf.get('required.autoscalingAlgorithm', "NONE")
-        configuration[MAX_WORKER_COUNT] = self.conf.get('required.maxNumWorkers', None)
-        configuration[LOG_LEVEL] = self.conf.get('required.loglevel', 'INFO')
+        configuration[AUTOSCALING_TYPE] = self.conf.get('required.autoscaling_algorithm', "NONE")
+        configuration[MAX_WORKER_COUNT] = self.conf.get('required.max_num_workers', None)
+        configuration[LOG_LEVEL] = self.conf.get('required.log_level', 'INFO')
 
         return configuration
 

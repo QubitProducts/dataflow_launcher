@@ -45,9 +45,9 @@ Make sure you have `virtualenv` installed.
 
 `--jar_file`: Path to the JAR file. Overrides -j. Default: NONE
 
-`--ignore_git`: Ignore git clean branch check
+`--ignore_git`: Don't check that the git branch is clean
 
-`-b` or `--bypass_prompt`: Skip the enter key press required before launching.
+`-b` or `--bypass_prompt`: Skip the enter key press required before launching
 
 `--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
 
@@ -77,30 +77,17 @@ It gets registered in `cli_parser_main`.
 
 All configuration information needs to be present in `flow.conf`
 
-**Parameters:**
-- `flow.name`: The name of the dataflow job (required).
-- `flow.streaming`: The mode of dataflow running: true - streaming, false - batch. Default: `true`
-- `flow.num_workers`: The number of dataflow workers. Default: `1`
-- `flow.worker_type`: The type of dataflow workers. Default: `n1-standard-4`
-- `flow.loglevel`: Log level for the job. Default: `INFO`
-- `pom.name`: Path to POM file. Default: `pom.xml`
-- `pom.generated_jar_name:` The name of the generated jar file. Default: `{artifact}-{version}.jar`. `{artifact}` and `{version}` will be replaced by the artifact-id and version as defined in the pom file
-- `pubsub.read`: Map of pubsub read topics. See below for nomenclature.
-- `pubsub.write`: Map of pubsub write topics. See below for nomenclature.
-- `params`: Optional key-value parameters
-
 ### Sample flow.conf ###
-
 ```
 required {
   project_id: "test_project_id"
   name: "test"
   zone: "test_zone"
   num_workers: 1
-  autoscalingAlgorithm: "THROUGHPUT_BASED"
-  maxNumWorkers: 10
+  autoscaling_algorithm: "THROUGHPUT_BASED"
+  max_num_workers: 10
   worker_type: "test_worker_type"
-  loglevel: "test_logLevel"
+  log_level: "test_logLevel"
 }
 
 pom {
@@ -134,23 +121,38 @@ flow {
 The required configuration handles Dataflow related options.
 We've added some default values to some of the options. The options are:
 ```
-project_id
-name
-zone
-num_workers (Default: 1)
-worker_type (Default: n1-standard-1)
-streaming (Default: true
-autoscalingAlgorithm (Default: NONE)
-maxNumWorkers
-loglevel (Default: INFO)
+required {
+  project_id: "test_project_id"
+  name: "test"
+  zone: "test_zone"
+  num_workers: 1
+  autoscaling_algorithm: "THROUGHPUT_BASED"
+  max_num_workers: 10
+  worker_type: "test_worker_type"
+  log_level: "test_logLevel"
+}
 ```
+
+- `required.project_id`: Id of the project the flow will run in.
+- `required.name`: The name of the dataflow job.
+- `required.zone`: The zone the flow will run in.
+- `required.num_workers`: The number of dataflow workers. Default: `1`
+- `required.autoscaling_algorithm`: The type of autoscaling algorithm to use. Current options are `THROUGHPUT_BASED` and `NONE`. Default: `NONE`
+- `required.max_num_workers`: The maximum number of workers the flow will scale up to.
+- `required.streaming`: The mode of dataflow running: true - streaming, false - batch. Default: `true`
+- `required.worker_type`: The type of dataflow workers. Default: `n1-standard-1`
+- `required.log_level`: Log level for the job. Default: `INFO`
 
 ### Pom Configuration ##
 ```
  pom {
     name: "test_pom.xml"
+    pom.generated_jar_name: "{artifact}-{version}-test.jar"
  }
 ```
+
+- `pom.name`: Path to POM file. Default: `pom.xml`
+- `pom.generated_jar_name`: The name of the generated jar file. Default: `{artifact}-{version}.jar`. `{artifact}` and `{version}` will be replaced by the artifact-id and version as defined in the pom file
 
 The launcher will attempt to figure out the artifact to deploy if the configuration for the jar was not passed in the arguments.
 It's currently set up to work with Java projects that have been build with `maven`.
