@@ -10,6 +10,7 @@ from dataflowlauncher.parsers.config_parsers.required_config_parser import (
     JOB_PROJECT_ID,
     JOB_ZONE,
     MAX_WORKER_COUNT,
+    RUNNER,
     STREAM_MODE,
     WORKER_COUNT,
     WORKER_TYPE
@@ -43,6 +44,7 @@ class TestRequiredConfigParser(TestCase):
             MAX_WORKER_COUNT: 10,
             WORKER_TYPE: "test_worker_type",
             JOB_PROJECT_ID: "test_project_id",
+            RUNNER: "TestRunner",
             STREAM_MODE: True,
         }
         self.assertDictEqual(parsed_config, reference_config)
@@ -64,12 +66,12 @@ class TestRequiredConfigParser(TestCase):
             maxNumWorkers=10,
             numWorkers="1",
             project="test_project_id",
-            runner="DataflowPipelineRunner",
+            runner="TestRunner",
             stagingLocation="gs://test_project_id-temp",
             streaming="true",
             update="false",
             workerMachineType="test_worker_type",
-            zone="test_zone"
+            zone="test_zone",
         )
         self.assertDictEqual(reference_args, jar_args)
 

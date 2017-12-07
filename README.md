@@ -87,6 +87,7 @@ required {
   autoscaling_algorithm: "THROUGHPUT_BASED"
   max_num_workers: 10
   worker_type: "test_worker_type"
+  runner: "PipelineRunner"
   log_level: "test_logLevel"
 }
 
@@ -129,6 +130,7 @@ required {
   autoscaling_algorithm: "THROUGHPUT_BASED"
   max_num_workers: 10
   worker_type: "test_worker_type"
+  runner: "PipelineRunner"
   log_level: "test_logLevel"
 }
 ```
@@ -141,6 +143,7 @@ required {
 - `required.max_num_workers`: The maximum number of workers the flow will scale up to.
 - `required.streaming`: The mode of dataflow running: true - streaming, false - batch. Default: `true`
 - `required.worker_type`: The type of dataflow workers. Default: `n1-standard-1`
+- `required.runner`: The runner the job will work with. This will tie into the Dataflow/Beam version you're using. Default: `DataflowPipelineRunner`
 - `required.log_level`: Log level for the job. Default: `INFO`
 
 ### Pom Configuration ##

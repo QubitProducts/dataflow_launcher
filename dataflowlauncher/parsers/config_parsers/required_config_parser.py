@@ -9,6 +9,7 @@ from dataflowlauncher.constants import (
     JOB_PROJECT_ID,
     JOB_ZONE,
     MAX_WORKER_COUNT,
+    RUNNER,
     STREAM_MODE,
     WORKER_COUNT,
     WORKER_TYPE
@@ -29,6 +30,7 @@ class RequiredConfigParser(ConfigParser):
         configuration[STREAM_MODE] = self.conf.get_bool('required.streaming', True)
         configuration[AUTOSCALING_TYPE] = self.conf.get('required.autoscaling_algorithm', "NONE")
         configuration[MAX_WORKER_COUNT] = self.conf.get('required.max_num_workers', None)
+        configuration[RUNNER] = self.conf.get('required.runner', 'DataflowPipelineRunner')
         configuration[LOG_LEVEL] = self.conf.get('required.log_level', 'INFO')
 
         return configuration
@@ -43,7 +45,7 @@ class RequiredConfigParser(ConfigParser):
             "workerMachineType": config[WORKER_TYPE],
             "defaultWorkerLogLevel": config[LOG_LEVEL],
             "streaming": str(config[STREAM_MODE]).lower(),
-            "runner": "DataflowPipelineRunner"
+            "runner": config[RUNNER]
         }
         variables.update(self.add_max_workers_from_autoscaling_type(config))
         variables.update(self.add_update_flag_to_config(config))

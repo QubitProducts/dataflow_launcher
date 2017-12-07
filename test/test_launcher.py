@@ -30,7 +30,7 @@ class TestLauncher(TestCase):
             '--workerMachineType=test_worker_type',
             '--defaultWorkerLogLevel=test_logLevel',
             '--streaming=true',
-            '--runner=DataflowPipelineRunner',
+            '--runner=TestRunner',
             '--autoscalingAlgorithm=THROUGHPUT_BASED',
             '--maxNumWorkers=10',
             '--subscriptionName=projects/test_project_id/subscriptions/test_subscription_to_read_from_test',
