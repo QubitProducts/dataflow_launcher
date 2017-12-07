@@ -22,7 +22,7 @@ class TestLauncher(TestCase):
         formatted_param_list = launcher.get_formatted_launch_parameters(parameter_list)
         self.assertCountEqual([
             '--project=test_project_id',
-            '--stagingLocation=gs://test_project_id-temp',
+            '--stagingLocation=gs://test_project_id-temp/dataflow_launcher',
             '--zone=test_zone',
             '--jobName=test',
             '--appName=test',

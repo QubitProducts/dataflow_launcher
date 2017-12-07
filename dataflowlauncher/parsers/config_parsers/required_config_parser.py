@@ -10,6 +10,7 @@ from dataflowlauncher.constants import (
     JOB_ZONE,
     MAX_WORKER_COUNT,
     RUNNER,
+    STAGING_STORAGE_BUCKET,
     STREAM_MODE,
     WORKER_COUNT,
     WORKER_TYPE
@@ -31,6 +32,7 @@ class RequiredConfigParser(ConfigParser):
         configuration[AUTOSCALING_TYPE] = self.conf.get('required.autoscaling_algorithm', "NONE")
         configuration[MAX_WORKER_COUNT] = self.conf.get('required.max_num_workers', None)
         configuration[RUNNER] = self.conf.get('required.runner', 'DataflowPipelineRunner')
+        configuration[STAGING_STORAGE_BUCKET] = self.conf.get('required.staging_storage_bucket', None)
         configuration[LOG_LEVEL] = self.conf.get('required.log_level', 'INFO')
 
         return configuration
@@ -81,7 +83,11 @@ class RequiredConfigParser(ConfigParser):
     @staticmethod
     def add_staging_storage_bucket(config):
         result = dict()
-        staging_bucket_name = '%s-temp' % config[JOB_PROJECT_ID]
-        create_gcs_if_not_exists(staging_bucket_name, config[JOB_ZONE], config[JOB_PROJECT_ID])
-        result["stagingLocation"] = 'gs://%s' % staging_bucket_name
+        if config[STAGING_STORAGE_BUCKET] is None:
+            staging_bucket_name = '%s-temp' % config[JOB_PROJECT_ID]
+            create_gcs_if_not_exists(staging_bucket_name, config[JOB_ZONE], config[JOB_PROJECT_ID])
+            result["stagingLocation"] = 'gs://%s/dataflow_launcher' % staging_bucket_name
+        else:
+            result["stagingLocation"] = config[STAGING_STORAGE_BUCKET]
+
         return result

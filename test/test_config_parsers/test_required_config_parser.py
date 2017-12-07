@@ -11,6 +11,7 @@ from dataflowlauncher.parsers.config_parsers.required_config_parser import (
     JOB_ZONE,
     MAX_WORKER_COUNT,
     RUNNER,
+    STAGING_STORAGE_BUCKET,
     STREAM_MODE,
     WORKER_COUNT,
     WORKER_TYPE
@@ -46,6 +47,7 @@ class TestRequiredConfigParser(TestCase):
             JOB_PROJECT_ID: "test_project_id",
             RUNNER: "TestRunner",
             STREAM_MODE: True,
+            STAGING_STORAGE_BUCKET: None,
         }
         self.assertDictEqual(parsed_config, reference_config)
 
@@ -67,7 +69,7 @@ class TestRequiredConfigParser(TestCase):
             numWorkers="1",
             project="test_project_id",
             runner="TestRunner",
-            stagingLocation="gs://test_project_id-temp",
+            stagingLocation="gs://test_project_id-temp/dataflow_launcher",
             streaming="true",
             update="false",
             workerMachineType="test_worker_type",
@@ -117,7 +119,6 @@ class TestRequiredConfigParser(TestCase):
         result = self.parser.add_update_flag_to_config(sample_config)
         self.assertEqual("true", result["update"])
 
-
     @patch("dataflowlauncher.parsers.config_parsers." \
            "required_config_parser.get_job_status", autospec=True)
     def test_add_update_flag_to_config_false(self, mock_job_status):
@@ -128,13 +129,21 @@ class TestRequiredConfigParser(TestCase):
 
     @patch("dataflowlauncher.parsers.config_parsers." \
            "required_config_parser.create_gcs_if_not_exists", autospec=True)
-    def test_add_staging_storage_bucket(self, mock_gcs_call):
+    def test_add_staging_storage_bucket_generated(self, mock_gcs_call):
         mock_gcs_call.return_value = None
-        sample_config = dict(JOB_PROJECT_ID="test", JOB_ZONE="test_zone")
-        reference_result = "gs://%s-temp" % sample_config[JOB_PROJECT_ID]
+        sample_config = dict(JOB_PROJECT_ID="test", JOB_ZONE="test_zone", STAGING_STORAGE_BUCKET=None)
+        reference_result = "gs://%s-temp/dataflow_launcher" % sample_config[JOB_PROJECT_ID]
         result = self.parser.add_staging_storage_bucket(sample_config)
         self.assertEqual(reference_result, result["stagingLocation"])
 
+    @patch("dataflowlauncher.parsers.config_parsers." \
+           "required_config_parser.create_gcs_if_not_exists", autospec=True)
+    def test_add_staging_storage_bucket_provided(self, mock_gcs_call):
+        mock_gcs_call.return_value = None
+        reference_result = "gcslocation"
+        sample_config = dict(JOB_PROJECT_ID="test", JOB_ZONE="test_zone", STAGING_STORAGE_BUCKET=reference_result)
+        result = self.parser.add_staging_storage_bucket(sample_config)
+        self.assertEqual(reference_result, result["stagingLocation"])
 
 if __name__ == '__main__':
     main()
