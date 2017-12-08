@@ -51,6 +51,11 @@ Make sure you have `virtualenv` installed.
 
 `--override_arguments`: Pass a list of arguments to the underlying command, overriding any set via the config file, specified as a space-separated list of \<key>=\<value> pairs
 
+
+**SDK/Runner Support**
+- *Dataflow SDK 1.9.1 and lower* - no configuration changes needed
+- *BEAM 2.0.0 and newer* - need to specify correct runner
+
 ### Program flow structure ###
 
 - Read the configuration file using the registered configuration readers
@@ -87,6 +92,8 @@ required {
   autoscaling_algorithm: "THROUGHPUT_BASED"
   max_num_workers: 10
   worker_type: "test_worker_type"
+  runner: "PipelineRunner"
+  staging_storage_bucket: "gs://somebucket/directory"
   log_level: "test_logLevel"
 }
 
@@ -129,6 +136,8 @@ required {
   autoscaling_algorithm: "THROUGHPUT_BASED"
   max_num_workers: 10
   worker_type: "test_worker_type"
+  runner: "PipelineRunner"
+  staging_storage_bucket: "gs://somebucket/directory"
   log_level: "test_logLevel"
 }
 ```
@@ -141,6 +150,8 @@ required {
 - `required.max_num_workers`: The maximum number of workers the flow will scale up to.
 - `required.streaming`: The mode of dataflow running: true - streaming, false - batch. Default: `true`
 - `required.worker_type`: The type of dataflow workers. Default: `n1-standard-1`
+- `required.runner`: The runner the job will work with. This will tie into the Dataflow/Beam version you're using. Default: `DataflowPipelineRunner`
+- `required.storage_staging_bucket`: The bucket where to store and run the jar from. Will create one based on project id if unspecified.
 - `required.log_level`: Log level for the job. Default: `INFO`
 
 ### Pom Configuration ##
