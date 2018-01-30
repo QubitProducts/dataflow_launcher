@@ -7,8 +7,8 @@ from dataflowlauncher.parsers.config_parsers.pubsub_config_parser import PubSubC
 from dataflowlauncher.parsers.config_parsers.required_config_parser import RequiredConfigParser
 
 CONFIG_PARSER_ITERABLE = (
-    RequiredConfigParser,
     FlowConfigParser,
+    RequiredConfigParser,
     PomConfigParser,
     PubSubConfigParser
 )
