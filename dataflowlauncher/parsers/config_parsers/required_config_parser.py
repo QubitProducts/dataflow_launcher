@@ -13,7 +13,8 @@ from dataflowlauncher.constants import (
     STAGING_STORAGE_BUCKET,
     STREAM_MODE,
     WORKER_COUNT,
-    WORKER_TYPE
+    WORKER_TYPE,
+    FLOW
 )
 from dataflowlauncher.parsers.config_parsers.base_config_parser import ConfigParser
 from dataflowlauncher.utils.dataflow_utils import get_job_status
@@ -68,7 +69,7 @@ class RequiredConfigParser(ConfigParser):
     def add_update_flag_to_config(config):
         result = dict()
         is_update = 'false'
-        job_running = get_job_status(config[JOB_PROJECT_ID], config[JOB_NAME])
+        job_running = get_job_status(config[JOB_PROJECT_ID], config[JOB_NAME], config[FLOW].get('region'))
         if job_running:
             logging.info("Located currently running job with ID: %s",
                          job_running)
