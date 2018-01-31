@@ -59,6 +59,7 @@ class TestRequiredConfigParser(TestCase):
         mock_gcs_call.return_value = None
         mock_job_status.return_value = True
         parsed_config = self.parser.get_config_parameters(self.test_file_name)
+        parsed_config['PARAMS'] = {}
         jar_args = self.parser.get_jar_params_from_conf(parsed_config)
         reference_args = dict(
             appName="test",
@@ -115,7 +116,7 @@ class TestRequiredConfigParser(TestCase):
            "required_config_parser.get_job_status", autospec=True)
     def test_add_update_flag_to_config_true(self, mock_job_status):
         mock_job_status.return_value = True
-        sample_config = dict(JOB_PROJECT_ID="test_job", JOB_NAME="test_name")
+        sample_config = dict(JOB_PROJECT_ID="test_job", JOB_NAME="test_name", PARAMS={})
         result = self.parser.add_update_flag_to_config(sample_config)
         self.assertEqual("true", result["update"])
 
@@ -123,7 +124,7 @@ class TestRequiredConfigParser(TestCase):
            "required_config_parser.get_job_status", autospec=True)
     def test_add_update_flag_to_config_false(self, mock_job_status):
         mock_job_status.return_value = False
-        sample_config = dict(JOB_PROJECT_ID="test_job", JOB_NAME="test_name")
+        sample_config = dict(JOB_PROJECT_ID="test_job", JOB_NAME="test_name", PARAMS={})
         result = self.parser.add_update_flag_to_config(sample_config)
         self.assertEqual("false", result["update"])
 
