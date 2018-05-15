@@ -1,6 +1,7 @@
 """Utility functions to talk to the dataflow service."""
 from oauth2client.client import GoogleCredentials
 from googleapiclient import discovery
+import logging
 
 
 def get_job_status(project_id, flow_name, region):
@@ -11,11 +12,14 @@ def get_job_status(project_id, flow_name, region):
     req = make_list_request(client, project_id, region)
     while req is not None:
         res = req.execute()
-        for job in res['jobs']:
-            if all(['name' in job, job['name'] == flow_name,
-                    job['currentState'] == 'JOB_STATE_RUNNING']):
-                return job['id']
-        req = make_next_request(client, region, req, res)
+        try:
+            for job in res['jobs']:
+                if all(['name' in job, job['name'] == flow_name,
+                        job['currentState'] == 'JOB_STATE_RUNNING']):
+                    return job['id']
+            req = make_next_request(client, region, req, res)
+        except KeyError as e:
+            logging.debug("No jobs running in project.")
     return None
 
 def make_list_request(client, project_id, region):
