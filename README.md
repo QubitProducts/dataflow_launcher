@@ -3,7 +3,7 @@
 Seamlessly launch dataflow jobs without worrying about paths, options, updates, and pubsub creation.
 
 ### Installation? ###
-`pip install git+ssh://git@github.com:QubitProducts/dataflow_launcher.git`
+`pip install git+ssh://git@github.com/QubitProducts/dataflow_launcher.git`
 
 ### Requirements ###
 It will use your locally stored `gcloud` credentials to launch the jobs.
