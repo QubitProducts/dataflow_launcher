@@ -8,6 +8,7 @@ Seamlessly launch dataflow jobs without worrying about paths, options, updates, 
 ### Requirements ###
 It will use your locally stored `gcloud` credentials to launch the jobs.
 You must ensure that the account you have set up has the correct rights to the project you're attempting to deploy to.
+Do this by runnning `gcloud init`
 
 ### How to run it? ###
 `python3 -m dataflowlauncher.launcher`
