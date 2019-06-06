@@ -3,7 +3,7 @@ gcloud==0.18.3
 google-api-python-client==1.6.4
 pyhocon==0.3.38
 giturlparse.py==0.0.5
-requests==2.18.4
+requests>=2.20.0
 pylint==1.7.4
 oauth2client==4.1.2
 clint==0.5.1

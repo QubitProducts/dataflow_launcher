@@ -3,11 +3,12 @@
 Seamlessly launch dataflow jobs without worrying about paths, options, updates, and pubsub creation.
 
 ### Installation? ###
-`pip install git+ssh://git@github.com/QubitProducts/dataflow_launcher.git`
+`pip3 install git+ssh://git@github.com/QubitProducts/dataflow_launcher.git`
 
 ### Requirements ###
 It will use your locally stored `gcloud` credentials to launch the jobs.
 You must ensure that the account you have set up has the correct rights to the project you're attempting to deploy to.
+Do this by runnning `gcloud init`
 
 ### How to run it? ###
 `python3 -m dataflowlauncher.launcher`
@@ -28,7 +29,7 @@ Make sure you have `virtualenv` installed.
 `./target/dataflow_launcher.pex`
 
 **Installing from source:**
-`pip install .`
+`pip3 install .`
 
 ### Usage
 **Flags:**
