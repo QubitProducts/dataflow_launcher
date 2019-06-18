@@ -22,7 +22,7 @@ TEST_REQUIREMENTS = [
 ]
 
 setup(name='dataflow_launcher',
-      version='0.1.0',
+      version='0.1.1',
       packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
       description='Launcher for Dataflow jobs',
       url='https://github.com/QubitProducts/dataflow_launcher',

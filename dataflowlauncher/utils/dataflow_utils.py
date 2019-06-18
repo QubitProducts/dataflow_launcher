@@ -19,7 +19,8 @@ def get_job_status(project_id, flow_name, region):
                     return job['id']
             req = make_next_request(client, region, req, res)
         except KeyError as e:
-            logging.debug("No jobs running in project.")
+            logging.info("No jobs running in project.")
+            break
     return None
 
 def make_list_request(client, project_id, region):
