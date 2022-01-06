@@ -18,7 +18,10 @@ def get_subscription_name(project_id, sub):
 
 
 def check_if_topic_exists(topic, existing_topics):
-    return {'name': topic} in existing_topics
+    for t in existing_topics:
+        if t.get('name', '') == topic:
+            return True
+    return False
 
 
 def get_list_from_key(key, dictionary):
