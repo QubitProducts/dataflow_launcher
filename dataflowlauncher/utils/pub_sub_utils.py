@@ -95,7 +95,7 @@ def setup_pubsub(project_id, topics, subs, create_missing_output_topics,
     from googleapiclient import discovery
 
     credentials = GoogleCredentials.get_application_default()
-    client = discovery.build('pubsub', 'v1', credentials=credentials)
+    client = discovery.build('pubsub', 'v1', credentials=credentials, cache_discovery=False)
     existing_topics = client.projects().topics().list(
         project='projects/{}'.format(project_id)).execute()
     existing_topics = get_list_from_key('topics', existing_topics)

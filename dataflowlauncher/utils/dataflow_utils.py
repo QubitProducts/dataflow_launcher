@@ -7,7 +7,7 @@ import logging
 def get_job_status(project_id, flow_name, region):
     """ Returns the status of a dataflow job given a job name."""
     credentials = GoogleCredentials.get_application_default()
-    client = discovery.build('dataflow', 'v1b3', credentials=credentials)
+    client = discovery.build('dataflow', 'v1b3', credentials=credentials, cache_discovery=False)
 
     req = make_list_request(client, project_id, region)
     while req is not None:
