@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 
 REQUIREMENTS = [
     "GitPython==2.1.7",
+    "gitdb2==3.0.1",
     "gcloud==0.18.3",
     "google-api-python-client==1.6.4",
     "pyhocon==0.3.38",
@@ -22,7 +23,7 @@ TEST_REQUIREMENTS = [
 ]
 
 setup(name='dataflow_launcher',
-      version='0.1.1',
+      version='0.1.2',
       packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
       description='Launcher for Dataflow jobs',
       url='https://github.com/QubitProducts/dataflow_launcher',
