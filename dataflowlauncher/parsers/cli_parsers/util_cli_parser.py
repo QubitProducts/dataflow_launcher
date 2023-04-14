@@ -13,6 +13,9 @@ class UtilCliParser(CliParser):
         util_parsers.add_argument(
             '-b', '--bypass_prompt', action='store_true',
             help='Skip enter key press required before launching. Default: false')
+        util_parsers.add_argument(
+            '--java_runtime', type=str, default='/usr/bin/java',
+            help='Optional java runtime. Default: /usr/bin/java')
 
     def run_preprocessing(self, config_dict, cli_args):
         return None
