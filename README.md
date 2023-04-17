@@ -13,7 +13,7 @@ Do this by runnning `gcloud init`
 ### How to run it? ###
 `python3 -m dataflowlauncher.launcher`
 
-Make sure you have `flow.conf` in the current directory. In addition, the script assumes that the current directory is the git root or one of its subdirectories.
+Make sure you have `flow.conf` in the current directory. In addition, the script assumes that the current directory resides inside a git repository.
 
 ## PEX Distribution
 
