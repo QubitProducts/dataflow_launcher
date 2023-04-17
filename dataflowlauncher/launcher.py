@@ -59,7 +59,7 @@ def run(args, exec_path):
         artifact, version = parse_pom(pom_path)
         jar_file = get_jar_filename(args.jar_path, artifact, version, config[JAR_NAME_FORMAT])
 
-    return run_with_parameters(parameter_list, args.bypass_prompt,
+    return run_with_parameters(args.java_runtime, parameter_list, args.bypass_prompt,
                                exec_path, jar_file)
 
 
@@ -94,12 +94,12 @@ def print_updated_parameters(updated_parameters, old_parameters):
     print()
 
 
-def run_with_parameters(parameter_list, bypass_prompt, exec_path, jar_filename):
+def run_with_parameters(java_runtime, parameter_list, bypass_prompt, exec_path, jar_filename):
     if not bypass_prompt:
         print()
         input("####### Press enter to continue with the deployment #######\n")
 
-    cmd = ["/usr/bin/java"]
+    cmd = [java_runtime]
     jar_path = os.path.join(exec_path, jar_filename)
     logging.info("Launching job via external process")
     cmd.extend(["-jar", jar_path])

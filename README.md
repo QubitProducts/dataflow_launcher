@@ -13,7 +13,7 @@ Do this by runnning `gcloud init`
 ### How to run it? ###
 `python3 -m dataflowlauncher.launcher`
 
-Make sure you have `flow.conf` in the current directory. In addition, the script assumes that the current directory also contains the git root.
+Make sure you have `flow.conf` in the current directory. In addition, the script assumes that the current directory resides inside a git repository.
 
 ## PEX Distribution
 
@@ -45,6 +45,8 @@ Make sure you have `virtualenv` installed.
 `-j` or `--jar_path`: Relative path to the JAR directory. Default: target
 
 `--jar_file`: Path to the JAR file. Overrides -j. Default: NONE
+
+`--java_runtime`: Alternative java runtime. Default: `/usr/bin/java`
 
 `--ignore_git`: Don't check that the git branch is clean
 

@@ -11,7 +11,7 @@ from oauth2client.client import GoogleCredentials
 def create_gcs_if_not_exists(bucket_name, region, project_id):
     """ Creates a GCS bucket if it does not exist."""
     credentials = GoogleCredentials.get_application_default()
-    client = discovery.build('storage', 'v1', credentials=credentials)
+    client = discovery.build('storage', 'v1', credentials=credentials, cache_discovery=False)
     try:
         client.buckets().get(bucket=bucket_name).execute()
     except HttpError as exception:
