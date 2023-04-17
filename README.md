@@ -46,7 +46,7 @@ Make sure you have `virtualenv` installed.
 
 `--jar_file`: Path to the JAR file. Overrides -j. Default: NONE
 
-`--java_runtime`: Alternative java runtime: Default `/usr/bin/java`
+`--java_runtime`: Alternative java runtime. Default: `/usr/bin/java`
 
 `--ignore_git`: Don't check that the git branch is clean
 
