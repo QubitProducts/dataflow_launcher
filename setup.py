@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 REQUIREMENTS = [
-    "GitPython==2.1.7",
+    "GitPython==3.1.30",
     "gitdb2==3.0.1",
     "gcloud==0.18.3",
     "google-api-python-client==1.6.4",
