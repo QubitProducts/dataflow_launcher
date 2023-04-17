@@ -13,7 +13,7 @@ REQUIREMENTS = [
     "oauth2client==4.1.2",
     "clint==0.5.1",
     "pex==1.2.13",
-    "wheel==0.29.0"
+    "wheel==0.38.1"
 ]
 
 TEST_REQUIREMENTS = [
